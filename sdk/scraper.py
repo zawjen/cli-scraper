@@ -18,9 +18,14 @@ class Scraper:
         parsed_url = urlparse(url)
         path = parsed_url.path.strip('/') or 'index.html'
         file_path = os.path.join(self.save_dir, path.replace('/', '_') + '.html')
+        #added by Kashif
+        with open('parsed_url.txt', '+a') as f:
+            f.write(f'{parsed_url.path}\n')
+
         with open(file_path, 'w', encoding='utf-8') as file:
             file.write(content)
         return file_path
+        
 
     def scrape_page(self, url):
         if url in self.visited:
